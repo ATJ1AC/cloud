@@ -1,211 +1,1076 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sh7omyLab - Your Personal Cloud Portal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
-            color: white;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            padding: 40px 0;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-        
-        .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-        
-        .feature-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .feature-desc {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-        
-        .access-info {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            margin: 40px 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .ip-display {
-            font-size: 1.5rem;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            font-family: monospace;
-        }
-        
-        .cta-button {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            margin-top: 15px;
-        }
-        
-        .cta-button:hover {
-            background: #45a049;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            opacity: 0.7;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sh7omyLab — Локальный портал</title>
+
+  <style>
+    /* Adobe/Spectrum-inspired tokens (без подключения Spectrum CSS) */
+    :root{
+      --bg-0:#0b0c0f;
+      --bg-1:#101218;
+      --bg-2:#161924;
+      --card:#171a23;
+      --card-2:#1b2030;
+      --text:#f2f4f8;
+      --text-2:#c7cfdd;
+      --muted:#8a93a6;
+      --border:rgba(255,255,255,.10);
+      --border-2:rgba(255,255,255,.16);
+
+      --blue:#1473e6;
+      --blue-2:#0d66d0;
+      --cyan:#00c8ff;
+      --red:#ff2d2d;
+      --green:#00d084;
+      --orange:#ff7a18;
+
+      --shadow: 0 12px 50px rgba(0,0,0,.45);
+      --shadow-soft: 0 10px 30px rgba(0,0,0,.30);
+      --ring: 0 0 0 3px rgba(20,115,230,.25);
+
+      --r-12:12px;
+      --r-16:16px;
+      --r-20:20px;
+
+      --sp-8:8px;
+      --sp-12:12px;
+      --sp-16:16px;
+      --sp-20:20px;
+      --sp-24:24px;
+      --sp-32:32px;
+      --sp-40:40px;
+      --sp-56:56px;
+
+      --ease: cubic-bezier(.2,.9,.2,1);
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html,body{ height:100%; }
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Inter", sans-serif;
+      background:
+        radial-gradient(1200px 600px at 25% 10%, rgba(20,115,230,.18), transparent 55%),
+        radial-gradient(800px 500px at 80% 18%, rgba(0,200,255,.10), transparent 50%),
+        radial-gradient(900px 600px at 40% 85%, rgba(255,45,45,.08), transparent 55%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1));
+      color:var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height:1.45;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    button, input { font:inherit; }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background: rgba(11,12,15,.72);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar__inner{
+      max-width:1200px; margin:0 auto;
+      padding: 14px var(--sp-24);
+      display:flex; align-items:center; justify-content:space-between;
+      gap: var(--sp-16);
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 220px;
+    }
+    .brand__mark{
+      width:34px; height:34px; border-radius:10px;
+      background: linear-gradient(135deg, rgba(20,115,230,1), rgba(0,200,255,.95));
+      box-shadow: 0 10px 30px rgba(20,115,230,.25);
+    }
+    .brand__name{ font-weight:800; letter-spacing:-.02em; }
+    .brand__hint{ font-size:12px; color:var(--muted); margin-top:2px; }
+
+    .nav{
+      display:flex; align-items:center; gap: 18px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      color: var(--text-2);
+      font-weight:600;
+      font-size: 13px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      transition: transform .15s var(--ease), background .15s var(--ease), color .15s var(--ease);
+    }
+    .nav a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      transform: translateY(-1px);
+    }
+
+    /* Layout */
+    .wrap{ max-width:1200px; margin:0 auto; padding: var(--sp-40) var(--sp-24) var(--sp-56); }
+    .hero{
+      padding: var(--sp-56) var(--sp-32);
+      border: 1px solid var(--border);
+      border-radius: var(--r-20);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0)),
+        radial-gradient(700px 260px at 10% 20%, rgba(20,115,230,.20), transparent 60%),
+        radial-gradient(600px 260px at 85% 35%, rgba(0,200,255,.14), transparent 60%),
+        rgba(16,18,24,.55);
+      box-shadow: var(--shadow-soft);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:-1px;
+      background: linear-gradient(90deg, transparent, rgba(20,115,230,.25), transparent);
+      opacity:.25;
+      transform: rotate(2deg);
+      pointer-events:none;
+    }
+    .hero__grid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: var(--sp-32);
+      align-items:center;
+      z-index:1;
+    }
+    .hero h1{
+      font-size: 46px;
+      letter-spacing: -0.04em;
+      line-height:1.05;
+      margin-bottom: 14px;
+    }
+    .hero p{
+      color: var(--text-2);
+      font-size: 16px;
+      max-width: 58ch;
+    }
+
+    .chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 18px; }
+    .chip{
+      font-size: 12px;
+      color: var(--text-2);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+    }
+
+    .panel{
+      border: 1px solid var(--border);
+      border-radius: var(--r-20);
+      background: rgba(23,26,35,.70);
+      box-shadow: var(--shadow-soft);
+      padding: var(--sp-24);
+      position:relative;
+    }
+    .panel__title{
+      font-weight: 800;
+      letter-spacing:-.02em;
+      margin-bottom: 8px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .badge{
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,45,45,.14);
+      border: 1px solid rgba(255,45,45,.22);
+      color: #ffd1d1;
+    }
+    .panel__desc{
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    .url{
+      display:flex; align-items:center; gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(11,12,15,.55);
+      border: 1px solid var(--border);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color: rgba(0,200,255,.95);
+      overflow:hidden;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px; background: var(--green);
+      box-shadow: 0 0 0 3px rgba(0,208,132,.12);
+      flex: 0 0 auto;
+    }
+    .url span{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    .btnrow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px; }
+    .btn{
+      border:1px solid transparent;
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor:pointer;
+      transition: transform .12s var(--ease), background .12s var(--ease), box-shadow .12s var(--ease), border-color .12s var(--ease);
+      display:inline-flex; align-items:center; gap:10px;
+      user-select:none;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn--primary{
+      background: var(--blue);
+      box-shadow: 0 12px 30px rgba(20,115,230,.25);
+      color:white;
+    }
+    .btn--primary:hover{ background: var(--blue-2); }
+    .btn--ghost{
+      background: rgba(255,255,255,.04);
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn--ghost:hover{
+      background: rgba(255,255,255,.06);
+      border-color: var(--border-2);
+      transform: translateY(-1px);
+    }
+    .btn--danger{
+      background: rgba(255,45,45,.10);
+      border-color: rgba(255,45,45,.22);
+      color: #ffd1d1;
+    }
+    .btn--danger:hover{ background: rgba(255,45,45,.16); }
+
+    /* Cards */
+    .section{
+      margin-top: var(--sp-40);
+      display:grid;
+      gap: var(--sp-24);
+    }
+    .section__head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap: var(--sp-16);
+      flex-wrap:wrap;
+    }
+    .section__head h2{
+      font-size: 20px;
+      letter-spacing:-.02em;
+    }
+    .section__head p{
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 80ch;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--sp-24);
+    }
+    .card{
+      grid-column: span 4;
+      border: 1px solid var(--border);
+      border-radius: var(--r-16);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0)),
+        rgba(23,26,35,.55);
+      padding: var(--sp-24);
+      transition: transform .15s var(--ease), border-color .15s var(--ease), box-shadow .15s var(--ease);
+      position:relative;
+      overflow:hidden;
+      min-height: 140px;
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      border-color: rgba(20,115,230,.28);
+      box-shadow: var(--shadow-soft);
+    }
+    .card__icon{
+      width: 44px; height: 44px; border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(20,115,230,.12);
+      border: 1px solid rgba(20,115,230,.22);
+      margin-bottom: 14px;
+      font-size: 18px;
+    }
+    .card__title{ font-weight: 900; letter-spacing:-.02em; margin-bottom: 8px; }
+    .card__desc{ color: var(--text-2); font-size: 13px; }
+
+    /* Parser */
+    .parser{
+      border:1px solid var(--border);
+      border-radius: var(--r-20);
+      background: rgba(16,18,24,.62);
+      box-shadow: var(--shadow-soft);
+      overflow:hidden;
+    }
+    .parser__bar{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding: 18px 22px;
+      background: rgba(23,26,35,.70);
+      border-bottom: 1px solid var(--border);
+      flex-wrap:wrap;
+    }
+    .parser__bar h3{
+      font-size: 16px;
+      letter-spacing:-.02em;
+      display:flex; align-items:center; gap:10px;
+    }
+    .pill{
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0,200,255,.12);
+      border: 1px solid rgba(0,200,255,.20);
+      color: #c9f3ff;
+    }
+    .parser__body{
+      padding: 22px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .sources{
+      border:1px solid var(--border);
+      border-radius: var(--r-16);
+      background: rgba(23,26,35,.55);
+      padding: 16px;
+    }
+    .sources__title{
+      font-weight: 900;
+      letter-spacing:-.02em;
+      margin-bottom: 10px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .sources__title span{ color: var(--muted); font-weight:700; font-size: 12px; }
+
+    .tabs{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .tab{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: var(--text-2);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 800;
+      font-size: 12px;
+      cursor:pointer;
+      transition: background .12s var(--ease), border-color .12s var(--ease), transform .12s var(--ease);
+      display:inline-flex; align-items:center; gap:10px;
+      user-select:none;
+    }
+    .tab:hover{ background: rgba(255,255,255,.05); transform: translateY(-1px); }
+    .tab.active{
+      background: rgba(20,115,230,.14);
+      border-color: rgba(20,115,230,.26);
+      color: var(--text);
+    }
+    .tick{
+      width: 14px; height: 14px; accent-color: var(--blue);
+    }
+
+    .form{
+      display:grid;
+      gap: 12px;
+    }
+    .field label{
+      display:block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .control{
+      width:100%;
+      background: rgba(11,12,15,.55);
+      border:1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 12px;
+      color: var(--text);
+      transition: box-shadow .12s var(--ease), border-color .12s var(--ease), background .12s var(--ease);
+      outline:none;
+    }
+    .control:focus{
+      border-color: rgba(20,115,230,.55);
+      box-shadow: var(--ring);
+      background: rgba(11,12,15,.70);
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .toggles{
+      display:flex; gap: 14px; flex-wrap:wrap;
+      margin-top: 4px;
+    }
+    .toggle{
+      display:flex; align-items:center; gap: 10px;
+      color: var(--text-2);
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .toggle input{ width: 18px; height: 18px; accent-color: var(--blue); }
+
+    .actions{
+      border:1px solid var(--border);
+      border-radius: var(--r-16);
+      background: rgba(23,26,35,.55);
+      padding: 16px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .actions .btn{ justify-content:center; }
+    .hint{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .results{
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--border);
+      padding: 18px 22px 22px;
+      display:grid;
+      gap: 12px;
+      background: rgba(11,12,15,.20);
+    }
+    .results__head{
+      display:flex; align-items:center; justify-content:space-between; gap: 12px;
+      flex-wrap:wrap;
+    }
+    .results__head h4{
+      font-size: 14px;
+      letter-spacing:-.01em;
+      color: var(--text);
+    }
+    .mini{
+      display:flex; gap: 10px; flex-wrap:wrap;
+    }
+    .mini .btn{
+      padding: 9px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .list{
+      display:grid;
+      gap: 10px;
+      max-height: 420px;
+      overflow:auto;
+      padding-right: 4px;
+    }
+    .item{
+      border:1px solid var(--border);
+      border-radius: var(--r-16);
+      background: rgba(23,26,35,.55);
+      padding: 14px 14px;
+      display:grid;
+      gap: 8px;
+    }
+    .meta{
+      display:flex; align-items:center; justify-content:space-between; gap: 10px;
+      flex-wrap:wrap;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .src{
+      font-weight: 900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      color: var(--text-2);
+      background: rgba(255,255,255,.03);
+    }
+    .src.bbc{ border-color: rgba(187,25,25,.35); background: rgba(187,25,25,.10); color: #ffd1d1; }
+    .src.guardian{ border-color: rgba(0,86,137,.35); background: rgba(0,86,137,.12); color: #cfe9ff; }
+    .src.nyt{ border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.05); color: #e8ebf2; }
+
+    .title{
+      font-weight: 900;
+      letter-spacing:-.01em;
+      line-height:1.25;
+    }
+    .summary{ color: var(--text-2); font-size: 13px; }
+    .tags{ display:flex; gap: 8px; flex-wrap:wrap; }
+    .tag{
+      font-size: 11px;
+      color: var(--text-2);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .empty{
+      border:1px dashed rgba(255,255,255,.16);
+      border-radius: var(--r-16);
+      padding: 26px;
+      color: var(--muted);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+    .empty strong{ color: var(--text-2); }
+    .progress{
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      overflow:hidden;
+    }
+    .progress > div{
+      height:100%;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(20,115,230,1), rgba(0,200,255,1));
+      transition: width .2s var(--ease);
+    }
+
+    footer{
+      margin-top: var(--sp-56);
+      color: var(--muted);
+      font-size: 12px;
+      text-align:center;
+      padding: 18px 0 0;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+
+    @media (max-width: 960px){
+      .hero__grid{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+      .card{ grid-column: span 12; }
+      .parser__body{ grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>Sh7omyLab</h1>
-            <p class="subtitle">Your personal cloud portal with storage, notes, calendar, and AI assistance accessible within your local network</p>
-        </header>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">💾</div>
-                <h3 class="feature-title">Cloud Storage</h3>
-                <p class="feature-desc">Secure file storage with upload/download capabilities and version control</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">📝</div>
-                <h3 class="feature-title">Notes System</h3>
-                <p class="feature-desc">Create, organize and search your notes with rich text editing</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">📅</div>
-                <h3 class="feature-title">Calendar</h3>
-                <p class="feature-desc">Schedule events, set reminders and manage your time effectively</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🤖</div>
-                <h3 class="feature-title">AI Assistant</h3>
-                <p class="feature-desc">Local AI for chat, document analysis, and intelligent assistance</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">💬</div>
-                <h3 class="feature-title">Telegram Bot</h3>
-                <p class="feature-desc">Connect to your portal through Telegram for remote access</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3 class="feature-title">Secure Access</h3>
-                <p class="feature-desc">Private and secure access limited to your local network</p>
-            </div>
+  <div class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">
+        <div class="brand__mark" aria-hidden="true"></div>
+        <div>
+          <div class="brand__name">Sh7omyLab</div>
+          <div class="brand__hint">Локальная лаборатория • LAN-портал</div>
         </div>
-        
-        <div class="access-info">
-            <h2>Access Portal</h2>
-            <p>This service is accessible within your local network</p>
-            <div class="ip-display" id="ipAddress">http://[YOUR_LOCAL_IP]:8080</div>
-            <button class="cta-button" onclick="connectToPortal()">Connect to Sh7omyLab</button>
-        </div>
-        
-        <footer>
-            <p>Sh7omyLab - Personal Cloud Solution | Securely hosted on your local network</p>
-        </footer>
+      </div>
+
+      <nav class="nav">
+        <a href="#features">Возможности</a>
+        <a href="#access">Доступ</a>
+        <a href="#collector">Сбор информации</a>
+      </nav>
     </div>
-    
-    <script>
-        // Simple script to potentially update IP address dynamically
-        function connectToPortal() {
-            alert("Connecting to Sh7omyLab portal...\n\nIn the actual implementation, this would connect to your local service.");
+  </div>
+
+  <main class="wrap">
+    <section class="hero" id="access">
+      <div class="hero__grid">
+        <div>
+          <h1>Портал для твоей локальной сети</h1>
+          <p>
+            Sh7omyLab — это личное облако, заметки, календарь и локальный ИИ‑помощник в одном месте.
+            Сейчас запускаем первый модуль: <b>сбор новостей</b> (BBC / The Guardian / The New York Times).
+          </p>
+
+          <div class="chips">
+            <div class="chip">LAN-only</div>
+            <div class="chip">FastAPI-ready</div>
+            <div class="chip">LLM ≤ 12B</div>
+            <div class="chip">RAG / Search позже</div>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <div class="panel__title">
+            <span>Доступ к порталу</span>
+            <span class="badge">локальная сеть</span>
+          </div>
+          <div class="panel__desc">Адрес будет подставлен сервером автоматически (или отобразится текущий хост).</div>
+
+          <div class="url" title="Адрес Sh7omyLab">
+            <div class="dot" aria-hidden="true"></div>
+            <span id="portalUrl">http://192.168.1.XXX:8080</span>
+          </div>
+
+          <div class="btnrow">
+            <button class="btn btn--primary" id="btnOpen">
+              <span aria-hidden="true">↗</span> Открыть портал
+            </button>
+            <button class="btn btn--ghost" id="btnCopy">
+              <span aria-hidden="true">⧉</span> Скопировать адрес
+            </button>
+          </div>
+
+          <div class="hint" id="copyHint" style="display:none;">Адрес скопирован.</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="section__head">
+        <div>
+          <h2>Возможности (план)</h2>
+          <p>Это дорожная карта Sh7omyLab. Сейчас реализуем модуль «Сбор информации».</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card__icon">💾</div>
+          <div class="card__title">Облачное хранилище</div>
+          <div class="card__desc">Файлы, версии, быстрый доступ внутри LAN.</div>
+        </div>
+
+        <div class="card">
+          <div class="card__icon">📝</div>
+          <div class="card__title">Заметки</div>
+          <div class="card__desc">Markdown/теги/поиск, привязка к файлам и задачам.</div>
+        </div>
+
+        <div class="card">
+          <div class="card__icon">📅</div>
+          <div class="card__title">Календарь</div>
+          <div class="card__desc">События, напоминания, интеграция с ботами позже.</div>
+        </div>
+
+        <div class="card">
+          <div class="card__icon">🤖</div>
+          <div class="card__title">Локальный ИИ‑помощник</div>
+          <div class="card__desc">Чат, резюме документов, извлечение задач, RAG.</div>
+        </div>
+
+        <div class="card">
+          <div class="card__icon">💬</div>
+          <div class="card__title">Telegram‑боты</div>
+          <div class="card__desc">Доступ к заметкам/напоминаниям/ИИ через Telegram.</div>
+        </div>
+
+        <div class="card">
+          <div class="card__icon">📰</div>
+          <div class="card__title">Сбор информации</div>
+          <div class="card__desc">Новости из источников, фильтры, экспорт, позже — анализ LLM.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="collector">
+      <div class="section__head">
+        <div>
+          <h2>Сбор информации: Новости</h2>
+          <p>
+            UI готов. Дальше ты подключишь backend, который будет забирать данные через RSS/API и отдавать нормализованный JSON.
+            Скрейпить HTML можно, но это менее стабильно.
+          </p>
+        </div>
+      </div>
+
+      <div class="parser">
+        <div class="parser__bar">
+          <h3>🧲 Коллектор новостей <span class="pill">MVP</span></h3>
+          <div style="min-width:260px; flex:1; max-width:480px;">
+            <div class="progress" title="Прогресс запроса">
+              <div id="progressFill"></div>
+            </div>
+            <div class="hint" id="statusLine">Ожидание запроса.</div>
+          </div>
+        </div>
+
+        <div class="parser__body">
+          <div class="sources">
+            <div class="sources__title">
+              <div>Источники</div>
+              <span>включи нужные</span>
+            </div>
+
+            <div class="tabs">
+              <button class="tab active" data-src="bbc">
+                <input class="tick" type="checkbox" id="src_bbc" checked />
+                BBC
+              </button>
+              <button class="tab active" data-src="guardian">
+                <input class="tick" type="checkbox" id="src_guardian" checked />
+                The Guardian
+              </button>
+              <button class="tab active" data-src="nyt">
+                <input class="tick" type="checkbox" id="src_nyt" checked />
+                NY Times
+              </button>
+            </div>
+
+            <div class="form">
+              <div class="field">
+                <label for="query">Ключевые слова</label>
+                <input class="control" id="query" placeholder="Напр.: cybersecurity, AI, Russia, санкции..." />
+              </div>
+
+              <div class="row">
+                <div class="field">
+                  <label for="limit">Лимит статей</label>
+                  <input class="control" id="limit" type="number" min="1" max="50" value="12" />
+                </div>
+                <div class="field">
+                  <label for="lang">Язык выдачи</label>
+                  <input class="control" id="lang" placeholder="ru / en (позже)" value="ru" />
+                </div>
+              </div>
+
+              <div class="toggles">
+                <label class="toggle">
+                  <input type="checkbox" id="opt_summary" checked />
+                  Делать краткое резюме (позже через LLM)
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" id="opt_dedup" checked />
+                  Убирать дубликаты
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" id="opt_translate" />
+                  Переводить на русский (позже)
+                </label>
+              </div>
+
+              <div class="hint">
+                Совет: на backend лучше принять параметры и вернуть единый формат:
+                <code style="color:rgba(0,200,255,.95)">[{source,title,url,published_at,summary,tags}]</code>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn--primary" id="btnFetch">
+              <span aria-hidden="true">⟲</span> Собрать новости
+            </button>
+            <button class="btn btn--ghost" id="btnDemo">
+              <span aria-hidden="true">⚗</span> Демо‑данные (без сервера)
+            </button>
+            <button class="btn btn--danger" id="btnClear">
+              <span aria-hidden="true">⌫</span> Очистить результаты
+            </button>
+
+            <div class="hint">
+              Backend endpoint (заглушка): <code style="color:rgba(0,200,255,.95)">POST /api/news/fetch</code>
+            </div>
+          </div>
+
+          <div class="results">
+            <div class="results__head">
+              <h4>Результаты</h4>
+              <div class="mini">
+                <button class="btn btn--ghost" id="btnExportJson">Экспорт JSON</button>
+                <button class="btn btn--ghost" id="btnExportMd">Экспорт Markdown</button>
+              </div>
+            </div>
+
+            <div class="list" id="resultsList">
+              <div class="empty" id="emptyState">
+                <div>
+                  <div style="font-weight:900; letter-spacing:-.01em;">Пока тут пусто.</div>
+                  <div>Нажми <strong>«Собрать новости»</strong> или <strong>«Демо‑данные»</strong>.</div>
+                </div>
+                <div class="tag">Sh7omyLab Collector</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Sh7omyLab • Локальный портал • MVP интерфейс коллектора новостей
+    </footer>
+  </main>
+
+  <script>
+    // ====== Portal URL helpers ======
+    const portalUrlEl = document.getElementById("portalUrl");
+    const btnOpen = document.getElementById("btnOpen");
+    const btnCopy = document.getElementById("btnCopy");
+    const copyHint = document.getElementById("copyHint");
+
+    function guessPortalUrl() {
+      // В браузере нельзя надёжно получить "локальный IP", но можно отобразить текущий origin
+      const origin = window.location.origin;
+      if (origin && origin.startsWith("http")) return origin;
+      return "http://192.168.1.XXX:8080";
+    }
+
+    const guessed = guessPortalUrl();
+    portalUrlEl.textContent = guessed;
+
+    btnOpen.addEventListener("click", () => {
+      window.open(guessed, "_blank");
+    });
+
+    btnCopy.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(guessed);
+        copyHint.style.display = "block";
+        setTimeout(() => (copyHint.style.display = "none"), 1200);
+      } catch (e) {
+        alert("Не удалось скопировать. Скопируй вручную: " + guessed);
+      }
+    });
+
+    // ====== Collector UI logic ======
+    const statusLine = document.getElementById("statusLine");
+    const progressFill = document.getElementById("progressFill");
+
+    const btnFetch = document.getElementById("btnFetch");
+    const btnDemo = document.getElementById("btnDemo");
+    const btnClear = document.getElementById("btnClear");
+
+    const resultsList = document.getElementById("resultsList");
+    const emptyState = document.getElementById("emptyState");
+
+    const btnExportJson = document.getElementById("btnExportJson");
+    const btnExportMd = document.getElementById("btnExportMd");
+
+    const tabs = document.querySelectorAll(".tab");
+    tabs.forEach(tab => {
+      tab.addEventListener("click", (e) => {
+        // если клик по чекбоксу — не переключаем классы тут, он сам изменится
+        if (e.target && e.target.tagName === "INPUT") return;
+
+        const src = tab.dataset.src;
+        const chk = document.getElementById("src_" + src);
+        chk.checked = !chk.checked;
+        tab.classList.toggle("active", chk.checked);
+      });
+    });
+
+    // синхронизация active при ручном клике по checkbox
+    ["bbc","guardian","nyt"].forEach(s => {
+      const chk = document.getElementById("src_" + s);
+      const tab = document.querySelector(`.tab[data-src="${s}"]`);
+      chk.addEventListener("change", () => tab.classList.toggle("active", chk.checked));
+    });
+
+    let lastData = [];
+
+    function setProgress(p) {
+      progressFill.style.width = Math.max(0, Math.min(100, p)) + "%";
+    }
+
+    function setStatus(text) {
+      statusLine.textContent = text;
+    }
+
+    function clearResults() {
+      lastData = [];
+      resultsList.innerHTML = "";
+      resultsList.appendChild(emptyState);
+      emptyState.style.display = "flex";
+      setStatus("Очищено. Ожидание запроса.");
+      setProgress(0);
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function render(items) {
+      lastData = items || [];
+      resultsList.innerHTML = "";
+      if (!lastData.length) {
+        resultsList.appendChild(emptyState);
+        emptyState.style.display = "flex";
+        return;
+      }
+      emptyState.style.display = "none";
+
+      for (const it of lastData) {
+        const srcClass = (it.source || "").toLowerCase();
+        const srcLabel = (it.source || "source").toUpperCase();
+        const date = it.published_at ? new Date(it.published_at).toLocaleString("ru-RU") : "—";
+
+        const el = document.createElement("div");
+        el.className = "item";
+        el.innerHTML = `
+          <div class="meta">
+            <span class="src ${escapeHtml(srcClass)}">${escapeHtml(srcLabel)}</span>
+            <span>${escapeHtml(date)}</span>
+          </div>
+          <div class="title">
+            <a href="${escapeHtml(it.url || "#")}" target="_blank" rel="noopener noreferrer">
+              ${escapeHtml(it.title || "Без заголовка")}
+            </a>
+          </div>
+          ${it.summary ? `<div class="summary">${escapeHtml(it.summary)}</div>` : ""}
+          ${Array.isArray(it.tags) && it.tags.length ? `
+            <div class="tags">${it.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join("")}</div>
+          ` : ""}
+        `;
+        resultsList.appendChild(el);
+      }
+    }
+
+    function selectedSources() {
+      const s = [];
+      if (document.getElementById("src_bbc").checked) s.push("bbc");
+      if (document.getElementById("src_guardian").checked) s.push("guardian");
+      if (document.getElementById("src_nyt").checked) s.push("nyt");
+      return s;
+    }
+
+    function buildPayload() {
+      return {
+        sources: selectedSources(),
+        query: document.getElementById("query").value.trim(),
+        limit: Number(document.getElementById("limit").value || 12),
+        lang: document.getElementById("lang").value.trim() || "ru",
+        options: {
+          summary: document.getElementById("opt_summary").checked,
+          dedup: document.getElementById("opt_dedup").checked,
+          translate: document.getElementById("opt_translate").checked
         }
-        
-        // Attempt to get local IP (this is limited due to browser security, so showing placeholder)
-        window.onload = function() {
-            // In a real implementation with proper backend, we would get actual local IP
-            // For now, we'll just show a generic local IP example
-            const ipDisplay = document.getElementById('ipAddress');
-            if(ipDisplay) {
-                // This would be replaced with actual IP detection in the final implementation
-                ipDisplay.textContent = "http://192.168.1.XXX:8080";
-            }
-        };
-    </script>
+      };
+    }
+
+    async function fetchFromBackend() {
+      const payload = buildPayload();
+      if (!payload.sources.length) {
+        setStatus("Ошибка: выбери хотя бы один источник.");
+        return;
+      }
+      setStatus("Запрос отправлен…");
+      setProgress(18);
+
+      // Заглушка endpoint — ты реализуешь его в FastAPI позже
+      const res = await fetch("/api/news/fetch", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(payload)
+      });
+
+      setProgress(55);
+
+      if (!res.ok) {
+        const text = await res.text().catch(()=> "");
+        throw new Error("Backend error: " + res.status + " " + (text || res.statusText));
+      }
+
+      const data = await res.json();
+      setProgress(85);
+      return data;
+    }
+
+    function demoData() {
+      return [
+        {
+          source: "bbc",
+          title: "Пример: новость BBC (демо)",
+          url: "https://www.bbc.co.uk/",
+          published_at: new Date().toISOString(),
+          summary: "Это демонстрационная карточка. Backend позже будет отдавать реальные данные из RSS/API.",
+          tags: ["demo", "bbc"]
+        },
+        {
+          source: "guardian",
+          title: "Пример: материал The Guardian (демо)",
+          url: "https://www.theguardian.com/",
+          published_at: new Date(Date.now()-3600*1000).toISOString(),
+          summary: "UI готов: фильтры, экспорт, очистка. Осталось подключить FastAPI + нормализацию.",
+          tags: ["demo", "guardian"]
+        },
+        {
+          source: "nyt",
+          title: "Пример: статья NYT (демо)",
+          url: "https://www.nytimes.com/",
+          published_at: new Date(Date.now()-2*3600*1000).toISOString(),
+          summary: "NYT часто требует API/доступ. Для MVP можно начать с RSS где доступно или с официального API.",
+          tags: ["demo", "nyt"]
+        }
+      ];
+    }
+
+    btnDemo.addEventListener("click", () => {
+      setStatus("Загружены демо‑данные.");
+      setProgress(100);
+      render(demoData());
+      setTimeout(()=> setProgress(0), 700);
+    });
+
+    btnClear.addEventListener("click", clearResults);
+
+    btnFetch.addEventListener("click", async () => {
+      try {
+        setProgress(8);
+        setStatus("Сбор новостей…");
+        btnFetch.disabled = true;
+        btnDemo.disabled = true;
+
+        const data = await fetchFromBackend();
+        render(Array.isArray(data) ? data : (data.items || []));
+        setStatus("Готово.");
+        setProgress(100);
+        setTimeout(()=> setProgress(0), 900);
+      } catch (e) {
+        setStatus("Ошибка: " + (e?.message || e));
+        setProgress(0);
+      } finally {
+        btnFetch.disabled = false;
+        btnDemo.disabled = false;
+      }
+    });
+
+    // ===== Export =====
+    function downloadFile(filename, content, mime) {
+      const blob = new Blob([content], {type: mime});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    btnExportJson.addEventListener("click", () => {
+      downloadFile("sh7omylab_news.json", JSON.stringify(lastData, null, 2), "application/json;charset=utf-8");
+      setStatus("Экспортировано: JSON");
+    });
+
+    btnExportMd.addEventListener("click", () => {
+      const md = lastData.map(it => {
+        const src = (it.source || "").toUpperCase();
+        const date = it.published_at ? new Date(it.published_at).toLocaleString("ru-RU") : "";
+        const title = it.title || "Без заголовка";
+        const url = it.url || "";
+        const summary = it.summary ? `\n\n${it.summary}` : "";
+        return `- **[${src}]** [${title}](${url}) (${date})${summary}`;
+      }).join("\n");
+      downloadFile("sh7omylab_news.md", md || "# Пусто\n", "text/markdown;charset=utf-8");
+      setStatus("Экспортировано: Markdown");
+    });
+
+    // init
+    clearResults();
+  </script>
 </body>
 </html>
