@@ -1,1 +1,3 @@
-Nothing should be ignored based on the provided file changes. The added files (README.md, index.html) are standard source/config files that should be tracked in version control.
+(index.html is a source file, and there are no build artifacts, dependencies, or temp files in the changes)
+
+(empty — output nothing)
