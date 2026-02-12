@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sh7omyLab — Локальный портал</title>
@@ -560,9 +561,220 @@
       .parser__body{ grid-template-columns: 1fr; }
     }
   </style>
+=======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sh7omyLab - Your Personal Cloud Portal</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --primary-hover: #0d62da;
+            --secondary-color: #34a853;
+            --dark-bg: #0a0a0a;
+            --light-bg: #ffffff;
+            --card-bg: #ffffff;
+            --text-primary: #202124;
+            --text-secondary: #5f6368;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 32px 0;
+            text-align: center;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 64px 0;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(26, 115, 232, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .feature-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .access-section {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 48px;
+            text-align: center;
+            margin: 64px 0;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .access-section h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .access-section p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+
+        .ip-display {
+            font-size: 1.25rem;
+            padding: 16px 24px;
+            background: rgba(26, 115, 232, 0.05);
+            border-radius: 8px;
+            display: inline-block;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            margin-bottom: 24px;
+            border: 1px solid rgba(26, 115, 232, 0.2);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .cta-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cta-button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .access-section {
+                padding: 32px 24px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+>>>>>>> 4e2fec5c9740a122d93d65fe083562d5ab304853
 </head>
 
 <body>
+<<<<<<< HEAD
   <div class="topbar">
     <div class="topbar__inner">
       <div class="brand">
@@ -578,6 +790,65 @@
         <a href="#access">Доступ</a>
         <a href="#collector">Сбор информации</a>
       </nav>
+=======
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo">S</div>
+            </div>
+            <h1>Sh7omyLab</h1>
+            <p class="subtitle">Your personal cloud portal with storage, notes, calendar, and AI assistance accessible within your local network</p>
+        </header>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <h3 class="feature-title">Cloud Storage</h3>
+                <p class="feature-desc">Secure file storage with upload/download capabilities and version control</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📝</div>
+                <h3 class="feature-title">Notes System</h3>
+                <p class="feature-desc">Create, organize and search your notes with rich text editing</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3 class="feature-title">Calendar</h3>
+                <p class="feature-desc">Schedule events, set reminders and manage your time effectively</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">AI Assistant</h3>
+                <p class="feature-desc">Local AI for chat, document analysis, and intelligent assistance</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3 class="feature-title">Telegram Bot</h3>
+                <p class="feature-desc">Connect to your portal through Telegram for remote access</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3 class="feature-title">Secure Access</h3>
+                <p class="feature-desc">Private and secure access limited to your local network</p>
+            </div>
+        </div>
+        
+        <div class="access-section">
+            <h2>Access Your Personal Cloud</h2>
+            <p>This service is accessible within your local network</p>
+            <div class="ip-display" id="ipAddress">http://192.168.1.XXX:8080</div>
+            <button class="cta-button" onclick="connectToPortal()">Open Sh7omyLab</button>
+        </div>
+        
+        <footer>
+            <p>Sh7omyLab - Personal Cloud Solution | Securely hosted on your local network</p>
+        </footer>
+>>>>>>> 4e2fec5c9740a122d93d65fe083562d5ab304853
     </div>
   </div>
 
